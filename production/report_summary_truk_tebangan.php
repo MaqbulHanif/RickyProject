@@ -133,7 +133,7 @@ if (isset($_POST['save'])) {
                           <select name="status" class="form-control">
                             <option value="all" selected>Semua</option>
                             <option value="Lunas">Lunas</option>
-                            <option value="tidak_lunas">Tidak Lunas</option>
+                            <option value="Tidak Lunas">Tidak Lunas</option>
                           </select>
                         </div>
                       </div>                                            

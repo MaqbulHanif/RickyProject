@@ -6,7 +6,7 @@ include"header.php";
 if (isset($_POST['save'])) {
   $fileName = $_FILES['bongkar_nota_filename']['name'];
   $tempName = $_FILES['bongkar_nota_filename']['tmp_name'];
-  move_uploaded_file($tempName, "nota/$fileName");
+  move_uploaded_file($tempName, "../src/uploads/nota/$fileName$fileName");
 
   $query = $mysqli->query("
     INSERT into tebangan
@@ -141,9 +141,9 @@ if (isset($_POST['save'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="bongkar_status" class="form-control" required>
-                            <option value="all" selected>Semua</option>
-                            <option value="Lunas">Lunas</option>
-                            <option value="tidak_lunas">Tidak Lunas</option>
+                            <!-- <option value="all" selected>Semua</option> -->
+                            <option value="Lunas" selected>Lunas</option>
+                            <option value="Tidak Lunas">Tidak Lunas</option>
                           </select>
                         </div>
                       </div>
