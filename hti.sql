@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Okt 2020 pada 17.40
+-- Waktu pembuatan: 06 Okt 2020 pada 03.44
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.10
 
@@ -381,6 +381,26 @@ INSERT INTO `truk_log` (`truk_log_id`, `truk_number`, `supir_name`, `pinjaman_ua
 (38, 'B 9821 GK', 'Mina', 176800, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'North Deangeloberg', 'Harum cum soluta aliquam voluptates vel ab.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
 (39, 'B 9843 GK', 'Marcus', 833619, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Port Stanleyshire', 'Est aperiam cum cumque recusandae.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
 (40, 'B 9909 GK', 'Cloyd', 368822, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Daughertyhaven', 'Magnam ut magnam at repellendus perferendis dignissimos voluptatem.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `level` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `level`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin');
 
 -- --------------------------------------------------------
 
