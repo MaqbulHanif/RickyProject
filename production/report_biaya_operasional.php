@@ -22,6 +22,8 @@ if (isset($_POST['save'])) {
   JOIN tebangan ON tebangan.tebangan_id=operasional.tebangan_id
   WHERE ".$q2." ";     
 
+  echo $statement;
+
   $dataList = $mysqli->query($statement);  
   $dataList1 = $mysqli->query($statement1);  
 
@@ -59,13 +61,13 @@ if (isset($_POST['save'])) {
                           <select name="no_kendaraan" class="form-control" required>
                             <option value="all" selected>Semua</option>
                               <?php
-                                $query = $mysqli->query("SELECT truk.* FROM operasional JOIN truk ON truk.truk_id=operasional.truk_id");
+                                $query = $mysqli->query("SELECT truk.* FROM operasional JOIN truk ON truk.truk_id=operasional.truk_id GROUP BY truk_number");
                                 while ($data = $query->fetch_array()) {
                               ?> 
                               <option value="<?php echo $data['truk_id'] ?>"><?php echo $data['truk_number'];?></option>
                             <?php } ?>                            
                             <?php
-                                $query = $mysqli->query("SELECT tebangan.* FROM operasional JOIN tebangan ON tebangan.tebangan_id=operasional.tebangan_id");
+                                $query = $mysqli->query("SELECT tebangan.* FROM operasional JOIN tebangan ON tebangan.tebangan_id=operasional.tebangan_id GROUP BY tebangan_number");
                                 while ($data = $query->fetch_array()) {
                               ?> 
                               <option value="<?php echo $data['tebangan_id'] ?>"><?php echo $data['tebangan_number'];?></option>
