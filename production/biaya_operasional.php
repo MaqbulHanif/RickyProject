@@ -34,10 +34,12 @@ include"header.php" ?>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control">
                             <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
+                            <?php
+                              $query = $mysqli->query("SELECT * FROM truk GROUP BY truk_number");
+                              while ($data = $query->fetch_array()) {
+                            ?> 
+                            <option value="<?php echo $data['truk_number'] ?>"><?php echo $data['truk_number'];?>
+                          <?php } ?>
                           </select>
                         </div>
                       </div>
