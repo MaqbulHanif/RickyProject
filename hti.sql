@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Okt 2020 pada 06.26
+-- Waktu pembuatan: 06 Okt 2020 pada 07.29
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.10
 
@@ -115,7 +115,7 @@ CREATE TABLE `tebangan_bongkar` (
   `bongkar_tebangan_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bongkar_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Tidak Lunas',
   `information` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `special_case` tinyint(1) NOT NULL DEFAULT 0,
+  `special_case` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -125,26 +125,26 @@ CREATE TABLE `tebangan_bongkar` (
 --
 
 INSERT INTO `tebangan_bongkar` (`tebangan_log_id`, `tebangan_id`, `bongkar_date`, `bongkar_tonase`, `bongkar_nota_filename`, `bongkar_harga_tonase`, `pinjaman_uang_jalan`, `bongkar_hasil_perluasan`, `bongkar_tebangan_name`, `bongkar_status`, `information`, `special_case`, `created_at`, `updated_at`) VALUES
-(1, 1, '2020-10-05 00:00:00', 93, '/uploads/nota/5df112bf1c986e3c23bf697550859529.jpg', 25450200, 167778, 31832100, 'Sincere', 'Lunas', 'Quia nostrum minus soluta id qui aut.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(2, 2, '2020-10-05 00:00:00', 29, '/uploads/nota/2c26d55b11e0fd548154fa4ee24d7505.jpg', 20432300, 739058, 47592000, 'Alvena', 'Lunas', 'Unde itaque repellat aperiam temporibus non voluptate iure.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(3, 3, '2020-10-05 00:00:00', 2, '/uploads/nota/9a04de57100b604f5d85f752fffeaf09.jpg', 11506800, 889362, 28465100, 'Aidan', 'Lunas', 'Dicta cum et aliquid sed aut veniam dignissimos.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(4, 4, '2020-10-05 00:00:00', 45, '/uploads/nota/a6a61ed90301749c192644115920bc43.jpg', 17476500, 846061, 65508000, 'Lafayette', 'Lunas', 'Molestias dolores in explicabo et perferendis qui iure.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(5, 5, '2020-10-05 00:00:00', 17, '/uploads/nota/761b03995ca879c8612161a79064e4a8.jpg', 49504000, 660441, 26187100, 'Anderson', 'Lunas', 'Et repellat nam eum voluptatibus possimus.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(6, 6, '2020-10-05 00:00:00', 55, '/uploads/nota/a621bdce07f5126e82616ccb2df1e686.jpg', 23572600, 998929, 73735400, 'Raegan', 'Lunas', 'In necessitatibus qui laboriosam debitis doloremque error.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(7, 7, '2020-10-05 00:00:00', 83, '/uploads/nota/23a30869847365aa58d5f58cd5292baf.jpg', 40364600, 599826, 56700000, 'Norris', 'Lunas', 'Est error eos nisi et maxime officia maiores nisi.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(8, 8, '2020-10-05 00:00:00', 58, '/uploads/nota/58be9f85284824322dc7fd76c80a03cc.jpg', 44639200, 963043, 37140700, 'Shaylee', 'Lunas', 'A dolores amet cumque beatae.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(9, 9, '2020-10-05 00:00:00', 22, '/uploads/nota/c00c9b0957951fea7145d7aa8d626d47.jpg', 16266300, 927667, 90381600, 'Kennith', 'Lunas', 'Est voluptatibus numquam et veritatis ut repudiandae.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(10, 10, '2020-10-05 00:00:00', 84, '/uploads/nota/ee0f9094a1ce99a68bca25d0242a7dfd.jpg', 43923500, 878822, 53890600, 'Lisandro', 'Lunas', 'Minima qui quia id harum ratione eveniet quaerat dolorem.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(11, 11, '2020-10-05 00:00:00', 7, '/uploads/nota/e1ae7f9ac4df85a4d6fce12aafa5548b.jpg', 17491800, 281254, 43232000, 'Velva', 'Lunas', 'Nulla consectetur nesciunt est numquam.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(12, 12, '2020-10-05 00:00:00', 30, '/uploads/nota/8ac6346256474bbe5b35e8b1b35b3768.jpg', 12799800, 489091, 98871100, 'Karli', 'Lunas', 'Maiores suscipit vel soluta repellat omnis.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(13, 13, '2020-10-05 00:00:00', 52, '/uploads/nota/59a8b8197155d43dc9dfec9131d5b481.jpg', 37714300, 813185, 20919500, 'Elton', 'Lunas', 'Nisi nam totam quod et laudantium et.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(14, 14, '2020-10-05 00:00:00', 35, '/uploads/nota/52d853794a0ba24f9cd231d6ac66135a.jpg', 32610300, 899750, 61819700, 'Emelia', 'Lunas', 'Consectetur enim ut earum laudantium.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(15, 15, '2020-10-05 00:00:00', 69, '/uploads/nota/790bce3f0903d4da723bbdaa1826716f.jpg', 9215960, 525679, 84226400, 'Randal', 'Lunas', 'Eos vel consequatur debitis at placeat.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(16, 16, '2020-10-05 00:00:00', 79, '/uploads/nota/854934e194d0e57fe08acce03d2eb90f.jpg', 42687000, 532702, 13056900, 'Kameron', 'Lunas', 'Dolorem ea enim et eveniet alias soluta voluptatem.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(17, 17, '2020-10-05 00:00:00', 91, '/uploads/nota/9a54e971eef0a410cce3b8d6320fe54a.jpg', 10927500, 465437, 97225100, 'Regan', 'Lunas', 'Dolorem et eos ut non blanditiis.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(18, 18, '2020-10-05 00:00:00', 25, '/uploads/nota/f01f6de53fccb049a1705882a8620a74.jpg', 20043600, 111127, 87282400, 'Jazmin', 'Lunas', 'Enim odio asperiores rerum.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(19, 19, '2020-10-05 00:00:00', 10, '/uploads/nota/037551f92a0bb66d7bbcd43d9af8c54d.jpg', 9229420, 689349, 82641100, 'Judson', 'Lunas', 'Numquam ut natus quia impedit necessitatibus impedit mollitia.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
-(20, 20, '2020-10-05 00:00:00', 76, '/uploads/nota/d32adda397eaa4518d841c550298f67f.jpg', 14518700, 794337, 42240100, 'Tevin', 'Lunas', 'Voluptas quis accusamus aspernatur animi repellendus libero minus.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00');
+(1, 1, '2020-10-05 00:00:00', 93, '/uploads/nota/5df112bf1c986e3c23bf697550859529.jpg', 25450200, 167778, 31832100, 'Sincere', 'Lunas', 'Quia nostrum minus soluta id qui aut.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(2, 2, '2020-10-05 00:00:00', 29, '/uploads/nota/2c26d55b11e0fd548154fa4ee24d7505.jpg', 20432300, 739058, 47592000, 'Alvena', 'Lunas', 'Unde itaque repellat aperiam temporibus non voluptate iure.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(3, 3, '2020-10-05 00:00:00', 2, '/uploads/nota/9a04de57100b604f5d85f752fffeaf09.jpg', 11506800, 889362, 28465100, 'Aidan', 'Lunas', 'Dicta cum et aliquid sed aut veniam dignissimos.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(4, 4, '2020-10-05 00:00:00', 45, '/uploads/nota/a6a61ed90301749c192644115920bc43.jpg', 17476500, 846061, 65508000, 'Lafayette', 'Lunas', 'Molestias dolores in explicabo et perferendis qui iure.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(5, 5, '2020-10-05 00:00:00', 17, '/uploads/nota/761b03995ca879c8612161a79064e4a8.jpg', 49504000, 660441, 26187100, 'Anderson', 'Lunas', 'Et repellat nam eum voluptatibus possimus.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(6, 6, '2020-10-05 00:00:00', 55, '/uploads/nota/a621bdce07f5126e82616ccb2df1e686.jpg', 23572600, 998929, 73735400, 'Raegan', 'Lunas', 'In necessitatibus qui laboriosam debitis doloremque error.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(7, 7, '2020-10-05 00:00:00', 83, '/uploads/nota/23a30869847365aa58d5f58cd5292baf.jpg', 40364600, 599826, 56700000, 'Norris', 'Lunas', 'Est error eos nisi et maxime officia maiores nisi.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(8, 8, '2020-10-05 00:00:00', 58, '/uploads/nota/58be9f85284824322dc7fd76c80a03cc.jpg', 44639200, 963043, 37140700, 'Shaylee', 'Lunas', 'A dolores amet cumque beatae.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(9, 9, '2020-10-05 00:00:00', 22, '/uploads/nota/c00c9b0957951fea7145d7aa8d626d47.jpg', 16266300, 927667, 90381600, 'Kennith', 'Lunas', 'Est voluptatibus numquam et veritatis ut repudiandae.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(10, 10, '2020-10-05 00:00:00', 84, '/uploads/nota/ee0f9094a1ce99a68bca25d0242a7dfd.jpg', 43923500, 878822, 53890600, 'Lisandro', 'Lunas', 'Minima qui quia id harum ratione eveniet quaerat dolorem.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(11, 11, '2020-10-05 00:00:00', 7, '/uploads/nota/e1ae7f9ac4df85a4d6fce12aafa5548b.jpg', 17491800, 281254, 43232000, 'Velva', 'Lunas', 'Nulla consectetur nesciunt est numquam.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(12, 12, '2020-10-05 00:00:00', 30, '/uploads/nota/8ac6346256474bbe5b35e8b1b35b3768.jpg', 12799800, 489091, 98871100, 'Karli', 'Lunas', 'Maiores suscipit vel soluta repellat omnis.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(13, 13, '2020-10-05 00:00:00', 52, '/uploads/nota/59a8b8197155d43dc9dfec9131d5b481.jpg', 37714300, 813185, 20919500, 'Elton', 'Lunas', 'Nisi nam totam quod et laudantium et.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(14, 14, '2020-10-05 00:00:00', 35, '/uploads/nota/52d853794a0ba24f9cd231d6ac66135a.jpg', 32610300, 899750, 61819700, 'Emelia', 'Lunas', 'Consectetur enim ut earum laudantium.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(15, 15, '2020-10-05 00:00:00', 69, '/uploads/nota/790bce3f0903d4da723bbdaa1826716f.jpg', 9215960, 525679, 84226400, 'Randal', 'Lunas', 'Eos vel consequatur debitis at placeat.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(16, 16, '2020-10-05 00:00:00', 79, '/uploads/nota/854934e194d0e57fe08acce03d2eb90f.jpg', 42687000, 532702, 13056900, 'Kameron', 'Lunas', 'Dolorem ea enim et eveniet alias soluta voluptatem.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(17, 17, '2020-10-05 00:00:00', 91, '/uploads/nota/9a54e971eef0a410cce3b8d6320fe54a.jpg', 10927500, 465437, 97225100, 'Regan', 'Lunas', 'Dolorem et eos ut non blanditiis.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(18, 18, '2020-10-05 00:00:00', 25, '/uploads/nota/f01f6de53fccb049a1705882a8620a74.jpg', 20043600, 111127, 87282400, 'Jazmin', 'Lunas', 'Enim odio asperiores rerum.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(19, 19, '2020-10-05 00:00:00', 10, '/uploads/nota/037551f92a0bb66d7bbcd43d9af8c54d.jpg', 9229420, 689349, 82641100, 'Judson', 'Lunas', 'Numquam ut natus quia impedit necessitatibus impedit mollitia.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00'),
+(20, 20, '2020-10-05 00:00:00', 76, '/uploads/nota/d32adda397eaa4518d841c550298f67f.jpg', 14518700, 794337, 42240100, 'Tevin', 'Lunas', 'Voluptas quis accusamus aspernatur animi repellendus libero minus.', 'No', '2020-10-06 05:29:29', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,7 @@ CREATE TABLE `truk_log` (
   `tanggal_keluar` datetime NOT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `information` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `special_case` tinyint(1) NOT NULL DEFAULT 0,
+  `special_case` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -269,36 +269,36 @@ CREATE TABLE `truk_log` (
 --
 
 INSERT INTO `truk_log` (`truk_log_id`, `truk_id`, `supir_name`, `pinjaman_uang_jalan`, `tanggal_pinjaman_uang_jalan`, `tanggal_masuk`, `tanggal_keluar`, `location`, `information`, `special_case`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Alysson', 736172, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'South Wilbertown', 'Id velit dolores ipsa adipisci veniam voluptatem repellendus.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(2, 2, 'Jordi', 513107, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Bret', 'Quo saepe dolorum similique eveniet.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(3, 3, 'Adele', 299419, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'East Chaseburgh', 'Corporis sequi maxime in debitis aliquam.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(4, 4, 'Reilly', 813254, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Cheyennefurt', 'Ratione ipsum facere eligendi quo quia rerum.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(5, 5, 'Shaina', 972498, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Hickleview', 'Sit quis eum repudiandae ea deserunt et pariatur quia.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(6, 6, 'Samanta', 407117, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Emmerichberg', 'Ea non ut reprehenderit aliquid nam illum.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(7, 7, 'Sallie', 866883, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Port Jackton', 'Suscipit aut dolorem ut autem rerum natus.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(8, 8, 'Kailyn', 958745, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'South Kellishire', 'Amet nisi nulla non ab nihil.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(9, 9, 'Garrick', 329640, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Elenorburgh', 'Odit est nobis ullam qui.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(10, 10, 'Emmet', 439739, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Dawsonton', 'Et autem nesciunt fuga provident voluptatibus quisquam.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(11, 11, 'Jed', 780463, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Oralland', 'Est officiis ut dolores nam provident quis accusantium.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(12, 12, 'Albina', 928214, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Huelsview', 'Expedita quidem molestiae ipsam beatae quibusdam.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(13, 13, 'Angeline', 742680, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Hintzberg', 'Magnam commodi sed inventore iusto architecto praesentium commodi.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(14, 14, 'Alysha', 711861, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Junior', 'Velit officiis molestiae placeat expedita hic necessitatibus sit.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(15, 15, 'Matteo', 707072, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Prohaskaside', 'Quisquam et omnis vitae voluptatem quidem id eveniet.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(16, 16, 'Ashleigh', 742477, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Jacobsonborough', 'Reiciendis dolores sapiente ad cum voluptates.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(17, 17, 'Clay', 256091, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Derekborough', 'Sed facere et voluptatem numquam similique sed at et.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(18, 18, 'Baby', 252286, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Alejandrahaven', 'Minima tenetur eum quasi ut et aperiam molestias.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(19, 19, 'Katelyn', 265657, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Raeshire', 'Iure sequi sint velit non ullam vero vero.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(20, 20, 'Mabel', 566733, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Lake Garrisontown', 'Rerum inventore modi eaque ut maxime provident.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(21, 1, 'Devon', 474722, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Boganview', 'Dolore dolores exercitationem eos asperiores.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(22, 2, 'Reed', 763411, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Enaville', 'Nihil aliquam perferendis est vitae.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(23, 3, 'Mya', 107057, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'North Trevion', 'At quis voluptas magni explicabo.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(24, 4, 'Chester', 856149, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'North Waino', 'Itaque qui consequatur voluptatem aspernatur vel ipsa laboriosam.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(25, 5, 'Guido', 321423, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Marvinfurt', 'Reprehenderit distinctio minima esse sint.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(26, 6, 'Gabriella', 651589, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Skylafort', 'Qui dolor qui veritatis minima excepturi nemo voluptate.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(27, 7, 'Beryl', 115202, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'East Carolstad', 'Quo laboriosam ipsam ipsa ea.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(28, 8, 'Berry', 820963, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'New Leda', 'Blanditiis quaerat soluta suscipit qui fugiat laudantium.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(29, 9, 'Luisa', 826199, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'North Jada', 'Quaerat quasi eum dolor sed ex.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(30, 10, 'Drew', 977508, '2020-10-05 00:00:00', '2020-10-04 17:00:00', '2020-10-06 00:00:00', 'Schimmelfort', 'Voluptatibus aperiam dolore temporibus velit quis provident est.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00');
+(1, 1, 'Alysson', 736172, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'South Wilbertown', 'Id velit dolores ipsa adipisci veniam voluptatem repellendus.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(2, 2, 'Jordi', 513107, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Bret', 'Quo saepe dolorum similique eveniet.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(3, 3, 'Adele', 299419, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'East Chaseburgh', 'Corporis sequi maxime in debitis aliquam.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(4, 4, 'Reilly', 813254, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Cheyennefurt', 'Ratione ipsum facere eligendi quo quia rerum.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(5, 5, 'Shaina', 972498, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Hickleview', 'Sit quis eum repudiandae ea deserunt et pariatur quia.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(6, 6, 'Samanta', 407117, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Emmerichberg', 'Ea non ut reprehenderit aliquid nam illum.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(7, 7, 'Sallie', 866883, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Port Jackton', 'Suscipit aut dolorem ut autem rerum natus.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(8, 8, 'Kailyn', 958745, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'South Kellishire', 'Amet nisi nulla non ab nihil.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(9, 9, 'Garrick', 329640, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Elenorburgh', 'Odit est nobis ullam qui.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(10, 10, 'Emmet', 439739, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Dawsonton', 'Et autem nesciunt fuga provident voluptatibus quisquam.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(11, 11, 'Jed', 780463, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Oralland', 'Est officiis ut dolores nam provident quis accusantium.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(12, 12, 'Albina', 928214, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Huelsview', 'Expedita quidem molestiae ipsam beatae quibusdam.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(13, 13, 'Angeline', 742680, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Hintzberg', 'Magnam commodi sed inventore iusto architecto praesentium commodi.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(14, 14, 'Alysha', 711861, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Junior', 'Velit officiis molestiae placeat expedita hic necessitatibus sit.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(15, 15, 'Matteo', 707072, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Prohaskaside', 'Quisquam et omnis vitae voluptatem quidem id eveniet.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(16, 16, 'Ashleigh', 742477, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Jacobsonborough', 'Reiciendis dolores sapiente ad cum voluptates.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(17, 17, 'Clay', 256091, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Derekborough', 'Sed facere et voluptatem numquam similique sed at et.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(18, 18, 'Baby', 252286, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Alejandrahaven', 'Minima tenetur eum quasi ut et aperiam molestias.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(19, 19, 'Katelyn', 265657, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Raeshire', 'Iure sequi sint velit non ullam vero vero.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(20, 20, 'Mabel', 566733, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Lake Garrisontown', 'Rerum inventore modi eaque ut maxime provident.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(21, 1, 'Devon', 474722, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Boganview', 'Dolore dolores exercitationem eos asperiores.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(22, 2, 'Reed', 763411, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Enaville', 'Nihil aliquam perferendis est vitae.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(23, 3, 'Mya', 107057, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'North Trevion', 'At quis voluptas magni explicabo.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(24, 4, 'Chester', 856149, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'North Waino', 'Itaque qui consequatur voluptatem aspernatur vel ipsa laboriosam.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(25, 5, 'Guido', 321423, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Marvinfurt', 'Reprehenderit distinctio minima esse sint.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(26, 6, 'Gabriella', 651589, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Skylafort', 'Qui dolor qui veritatis minima excepturi nemo voluptate.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(27, 7, 'Beryl', 115202, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'East Carolstad', 'Quo laboriosam ipsam ipsa ea.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(28, 8, 'Berry', 820963, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'New Leda', 'Blanditiis quaerat soluta suscipit qui fugiat laudantium.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(29, 9, 'Luisa', 826199, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'North Jada', 'Quaerat quasi eum dolor sed ex.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00'),
+(30, 10, 'Drew', 977508, '2020-10-05 00:00:00', '2020-10-06 05:29:00', '2020-10-06 00:00:00', 'Schimmelfort', 'Voluptatibus aperiam dolore temporibus velit quis provident est.', 'No', '2020-10-06 05:29:00', '2020-10-06 05:29:00');
 
 -- --------------------------------------------------------
 
