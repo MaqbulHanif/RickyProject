@@ -8,7 +8,7 @@ include"header.php" ?>
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Truk Keluar-Masuk</h3>
+                <h3>Truk Bongkar Muatan</h3>
               </div>
 
             </div>
@@ -32,12 +32,12 @@ include"header.php" ?>
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">No. Kendaraan <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="No-Kendaraan" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="No-Kendaraan" required="required" name="truk_number" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       
                       <fieldset>
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Truk Masuk</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Truk Masuk Dari </label>
                         <div class="control-group">
                           <div class="controls">
                             <div class="col-md-6 xdisplay_inputx form-group has-feedback">
@@ -48,7 +48,7 @@ include"header.php" ?>
                       </fieldset>
 
                       <fieldset>
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Truk Keluar</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Sampai </label>
                         <div class="control-group">
                           <div class="controls">
                             <div class="col-md-6 xdisplay_inputx form-group has-feedback">
@@ -101,28 +101,38 @@ include"header.php" ?>
                       <thead>
                         <tr>
                           <th>No.</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>No Kendaraan</th>
+                          <th>Nama Supir</th>
+                          <th>Tanggal Masuk</th>
+                          <th>Tanggal Keluar</th>
+                          <th>Lokasi</th>
+                          <th>Pinjaman Uang Jalan</th>
+                          <th>Tanggal Pinjaman</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
+                          $i = 1;
                           $startDate= $_POST['startDate'];
                           $endDate= $_POST['endDate'];
-                          $query = $mysqli->query("SELECT * FROM truk_log tl INNER JOIN truk t on tl.truk_id = t.truk_id WHERE tl.tanggal_masuk BETWEEN '$startDate' AND '$endDate'");
-                    while ($data=$query->fetch_array()) {
+                          $noKendaraan = $_POST['truk_number'] . '%';
+                          $query = $mysqli->query("SELECT * FROM truk_log tl INNER JOIN truk t on tl.truk_id = t.truk_id 
+                            INNER JOIN vendor v on t.vendor_id = v.vendor_id
+                            WHERE tl.tanggal_masuk BETWEEN '$startDate' AND '$endDate' AND truk_number LIKE '$noKendaraan'");
+                          while ($data=$query->fetch_array()) {
                         ?>
                         <tr>
-                          <td><?php echo $data['truk_id'] ?></td>
-                          <td><?php echo $data['nama_supir'] ?></td>
-                          <td><?php echo $data['lokasi'] ?></td>
+                          <td><?php echo $i++; ?></td>
+                          <td><?php echo $data['truk_number'] ?></td>
+                          <td><?php echo $data['supir_name'] ?></td>
+                          <td><?php echo $data['tanggal_masuk'] ?></td>
+                          <td><?php echo $data['tanggal_keluar'] ?></td>
+                          <td><?php echo $data['location'] ?></td>
                           <td><?php echo $data['pinjaman_uang_jalan'] ?></td>
+                          <td><?php echo $data['tanggal_pinjaman_uang_jalan'] ?></td>
                           <td>
-                              <a class="btn btn-success btn-sm"  href="detail_sj.php?id_sj=<?php echo $data['id_sj']; ?>">Detail</a>
-                              <a class="btn btn-danger btn-sm" target="_blank" href="print.php?id_sj=<?php echo $data['id_sj']; ?>">Print</a>
-                              <a class="btn btn-primary btn-sm" href="?status=true&id_sj=<?php echo $data['id_sj'];?>">Received</a>
+                              <a class="btn btn-success btn-sm"  href="detail_truk_bongkar.php?truk_id=<?php echo $data['truk_id']; ?>">Detail</a>
                           </td>
                         </tr>   
                         <?php } ?>                     

@@ -18,37 +18,30 @@ if (isset($_POST['save'])) {
     ");
   $truk_id = mysqli_insert_id($mysqli);
   $query .= $mysqli->query("
-    INSERT into truk_log 
-    (
-       truk_id, 
-       nama_supir,
-       pinjaman_uang_jalan,
-       tgl_pinjaman_uang_jalan,
-       special_case,
-       lokasi,
-       informasi,
-       tanggal_masuk,
-       tanggal_keluar
-    )
-    value
-    (
-      '$truk_id',
-      '$_POST[nama_supir]',
-      '$_POST[pinjaman_uang_jalan]',
-      '$_POST[tgl_pinjaman_uang_jalan]',
-      '$_POST[special_case]',
-      '$_POST[lokasi]',
-      '$_POST[informasi]',
-      '$_POST[tanggal_masuk]',
-      '$_POST[tanggal_keluar]'
-      )");
-  // if(mysqli_multi_query($mysqli,$query)){
-  //   echo "Success";
-  // }
-  // else{
-  //   echo "Error :". $query . mysql_error($mysqli);
-  // }
-  // echo '<script>document.location="form"</script>';
+    INSERT into truk_log
+  (
+  truk_id,
+  supir_name,
+  pinjaman_uang_jalan,
+  tanggal_pinjaman_uang_jalan,
+  special_case,
+  location,
+  information,
+  tanggal_masuk,
+  tanggal_keluar
+  )
+  values
+  (
+  '$truk_id',
+  '$_POST[supir_name]',
+  '$_POST[pinjaman_uang_jalan]',
+  '$_POST[tanggal_pinjaman_uang_jalan]',
+  '$_POST[special_case]',
+  '$_POST[location]',
+  '$_POST[information]',
+  '$_POST[tanggal_masuk]',
+  '$_POST[tanggal_keluar]'
+  )");
 
 }
 
@@ -90,9 +83,18 @@ if (isset($_POST['save'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama-supir">Nama Supir
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="nama-supir" name="nama_supir" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="nama-supir" name="supir_name" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+
+                      <!-- <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Vendor
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="vendor" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div> -->
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pinjaman-uang-jalan">Pinjaman Uang Jalan
                         </label>
@@ -106,7 +108,7 @@ if (isset($_POST['save'])) {
                         <div class="control-group">
                           <div class="controls">
                             <div class="col-md-6 ">
-                              <input type="date" class="form-control" name="tgl_pinjaman_uang_jalan">
+                              <input type="date" class="form-control" name="tanggal_pinjaman_uang_jalan">
                             </div>
                           </div>
                         </div>
@@ -133,9 +135,9 @@ if (isset($_POST['save'])) {
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             
-                              <input type="radio" name="special_case" value="1" checked> Yes
+                              <input type="radio" name="special_case" value="1"> Yes
                             
-                              <input type="radio" name="special_case" value="0"> No
+                              <input type="radio" name="special_case" value="0" checked> No
                             
                           </div>
                         </div>
@@ -144,7 +146,7 @@ if (isset($_POST['save'])) {
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Lokasi</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="lokasi">
+                          <select class="form-control" name="location">
                             <option>Choose option</option>
                             <option value="Jakarta">Jakarta</option>
                           </select>
@@ -155,7 +157,7 @@ if (isset($_POST['save'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea class="form-control" rows="3" name="informasi"></textarea>
+                          <textarea class="form-control" rows="3" name="information"></textarea>
                         </div>
                       </div>
 

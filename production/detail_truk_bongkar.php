@@ -7,49 +7,42 @@ if (isset($_POST['save'])) {
   $fileName = $_FILES['bongkar_nota_filename']['name'];
   $tempName = $_FILES['bongkar_nota_filename']['tmp_name'];
   move_uploaded_file($tempName, "nota/$fileName");
+  
+  $query = $mysqli->query("
+  UPDATE truk_log
+  SET
+  supir_name = '$_POST[supir_name]',
+  pinjaman_uang_jalan = '$_POST[pinjaman_uang_jalan]',
+  tanggal_pinjaman_uang_jalan = '$_POST[tanggal_pinjaman_uang_jalan]',
+  tanggal_keluar = '$_POST[tanggal_keluar]',
+  information = '$_POST[information]'
+  Where truk_id = '$_GET[truk_id]'
+  ");
 
   $query = $mysqli->query("
-    INSERT into tebangan
+    INSERT INTO truk_bongkar 
     (
-      vendor_id,
-      tebangan_number
-    )
-    value
-    (
-      '$_POST[vendor_id]',
-      '$_POST[tebangan_number]'
-    )
-    ");
-
-  $tebangan_id = mysqli_insert_id($mysqli);
-  $query = $mysqli->query("
-    INSERT INTO tebangan_bongkar 
-    (
-    tebangan_id, 
+    truk_log_id, 
     bongkar_date, 
-    bongkar_tonase, 
+    bongkar_nota, 
     bongkar_nota_filename, 
+    bongkar_tonase, 
     bongkar_harga_tonase, 
-    pinjaman_uang_jalan, 
     bongkar_hasil_perluasan, 
     bongkar_tebangan_name, 
-    bongkar_status, 
-    information, 
-    special_case
+    bongkar_status
     ) 
     VALUES 
-    ( 
-    '$tebangan_id', 
-    '$_POST[bongkar_date]',
-    '$_POST[bongkar_tonase]', 
+    (
+    '$_POST[truk_log_id]',
+    '$_POST[bongkar_date]', 
+    '$_POST[bongkar_nota]', 
     '$fileName', 
+    '$_POST[bongkar_tonase]', 
     '$_POST[bongkar_harga_tonase]', 
-    '$_POST[pinjaman_uang_jalan]', 
     '$_POST[bongkar_hasil_perluasan]', 
     '$_POST[bongkar_tebangan_name]', 
-    '$_POST[bongkar_status]', 
-    '$_POST[information]', 
-    '$_POST[special_case]'
+    '$_POST[bongkar_status]'
     )
     ");
 
@@ -62,7 +55,7 @@ if (isset($_POST['save'])) {
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Tebangan</h3>
+                <h3>Truk Keluar-Masuk</h3>
               </div>
 
             </div>
@@ -81,39 +74,85 @@ if (isset($_POST['save'])) {
                   <div class="x_content">
                     <br />
                     <form action="" method="post" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
-
+                      <?php 
+                      $query = $mysqli->query("SELECT * FROM truk_log tl INNER JOIN truk t on tl.truk_id = t.truk_id 
+                            INNER JOIN vendor v on t.vendor_id = v.vendor_id
+                            WHERE t.truk_id = '$_GET[truk_id]'");
+                      while ($data=$query->fetch_array()) {
+                    ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Kendaraan <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">No. Kendaraan <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" required="required" name="tebangan_number" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Subkontraktor Tebangan <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="vendor_id" class="form-control">
-                            <option>Choose option</option>
-                            <?php
-                              $query = $mysqli->query("SELECT * FROM vendor");
-                              while ($data = $query->fetch_array()) {
-                            ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['vendor_name'];?></option>
-                          <?php } ?>
-                          </select>
+                          <input type="text" id="No-Kendaraan" required="required" value="<?php echo $data['truk_number'] ?>" name="no_kendaraan" class="form-control col-md-7 col-xs-12">
+                          <input type="hidden" required="required" value="<?php echo $data['truk_log_id'] ?>" name="truk_log_id" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Upload Nota Timbangan<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama-supir">Nama Supir <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" required="required" name="bongkar_nota_filename" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="nama-supir" required="required" value="<?php echo $data['supir_name'] ?>" name="supir_name" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <!-- <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Vendor / Pemilik Truk <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" value="<?php echo $data['vendor_name'] ?>" name="vendor_name" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div> -->
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">Pinjaman Uang Jalan <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="pinjaman-uang-jalan" required="required" value="<?php echo $data['pinjaman_uang_jalan'] ?>" name="pinjaman_uang_jalan" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       
                       <fieldset>
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Bongkar</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Pinjam Uang Jalan </label>
+                        <div class="control-group">
+                          <div class="controls">
+                            <div class="col-md-6 xdisplay_inputx form-group has-feedback">
+                              <input type="date" class="form-control" value="<?php echo $data['tanggal_pinjaman_uang_jalan']; ?>" name="tanggal_pinjaman_uang_jalan">
+                          </div>
+                        </div>
+                      </fieldset>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Vendor <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="vendor" required="required" value="<?php echo $data['vendor_name'] ?>" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <fieldset>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Keluar </label>
+                        <div class="control-group">
+                          <div class="controls">
+                            <div class="col-md-6 xdisplay_inputx form-group has-feedback">
+                              <input type="date" class="form-control" value="<?php echo $data['tanggal_keluar'] ?>" name="tanggal_keluar">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">Keterangan <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text"class="form-control" rows="3" value="<?php echo $data['information'] ?>" name="information"></input>
+                        </div>
+                      </div>
+                    <?php } ?>
+
+                      <fieldset>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Bongkar </label>
                         <div class="control-group">
                           <div class="controls">
                             <div class="col-md-6 xdisplay_inputx form-group has-feedback">
@@ -124,16 +163,33 @@ if (isset($_POST['save'])) {
                       </fieldset>
 
                       <div class="form-group">
-                        <label for="tebangan_kayu_siapa" class="control-label col-md-3 col-sm-3 col-xs-12">Tebangan Kayu Siapa <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tebangan Kayu Siapa <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tebangan_kayu_siapa" name="bongkar_tebangan_name" class="form-control col-md-7 col-xs-12" type="text">
+                          <input type="text" required="required" name="bongkar_tebangan_name" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      
+
                       <div class="form-group">
-                        <label for="sukbon" class="control-label col-md-3 col-sm-3 col-xs-12">Sukbon <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nomor Nota Timbang <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="sukbon" class="form-control col-md-7 col-xs-12" type="text">
+                          <input type="text" required="required" name="bongkar_nota" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">upload <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" required="required" name="bongkar_nota_filename" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tonase <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" name="bongkar_tonase" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
@@ -146,38 +202,17 @@ if (isset($_POST['save'])) {
                             <option value="tidak_lunas">Tidak Lunas</option>
                           </select>
                         </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Spesial Case Angkutan <span><small>(Mengangkat kayu tebangan lain)</small></span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="btn-group" data-toggle="buttons">
-                            
-                              <input type="radio" name="special_case" value="1" > Yes
-                            
-                              <input type="radio" name="special_case" value="0" checked> No
-                            
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan Tambahan
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea class="form-control" rows="3" name="information"></textarea>
-                        </div>
-                      </div>
+                      </div>  
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Perluasan Angkutan :
                         </label>
                         <div class="col-md-3 col-md-3 col-md-12 has-feedback">
-                          <input id="berat-tonase" name="bongkar_tonase" class="form-control" placeholder="Berat Tonase" type="text">
+                          <input id="berat-tonase" class="form-control" placeholder="Berat Tonase" type="text">
                           <span>x</span>
                           <input id="harga-pertonase" name="bongkar_harga_tonase" class="form-control" placeholder="Harga Per Tonase" type="text">
                           <span>-</span>
-                          <input id="PinjamanUangJalan" name="pinjaman_uang_jalan" class="form-control" placeholder="Pinjaman Uang jalan/dll" type="text">
+                          <input id="PinjamanUangJalan" class="form-control" placeholder="Pinjaman Uang jalan/dll" type="text">
                           <span>=</span>
                           <input id="hasil" name="bongkar_hasil_perluasan" class="form-control" placeholder="Hasil" type="text">
                         </div>
@@ -257,6 +292,6 @@ if (isset($_POST['save'])) {
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-  
+	
   </body>
 </html>
