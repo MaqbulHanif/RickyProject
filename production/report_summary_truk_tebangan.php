@@ -54,7 +54,7 @@ if (isset($_POST['save'])) {
   JOIN tebangan ON tebangan.tebangan_id=tebangan_bongkar.tebangan_id
   JOIN vendor ON vendor.vendor_id=tebangan.vendor_id
   WHERE (tebangan_bongkar.bongkar_date BETWEEN '".$from."' AND '".$to."') ".$q3." AND tebangan_bongkar.tebangan_id in (SELECT tebangan_id FROM tebangan WHERE ".$q1." ".$q2." )";   
-  echo $statement;
+  
   $dataList1 = $mysqli->query($statement);  
 
 }
