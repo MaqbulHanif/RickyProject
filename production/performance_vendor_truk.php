@@ -155,7 +155,7 @@ if (isset($_POST['save'])) {
                   </div>                  
                 </div>
                 <?php if (isset($_POST['save'])) { 
-                  $totalRitase = 0;
+                  $totalTonase = 0;
                   $totalPinjaman = 0; 
                   $totalPembayaran = 0;                   
                 ?>
@@ -184,9 +184,9 @@ if (isset($_POST['save'])) {
                         </thead>
                         <tbody>
                         <?php while ($row = $dataList->fetch_array()) {
-                          $totalRitase += floatval($row['bongkar_tonase']);
+                          $totalTonase += floatval($row['bongkar_tonase']);
                           $totalPembayaran += floatval($row['bongkar_hasil_perluasan']);
-                          $totalPinjaman += floatval($row['pinjaman_uang_jalan']);
+                          $totalPinjaman += floatval($row['pinjaman_uang_jalan']);                          
                           ?>
                           <tr>
                             <td><?= $x++; ?></td>
@@ -207,9 +207,11 @@ if (isset($_POST['save'])) {
                       </table>
                     </div>
                     <div class="x_content">
-                      <h2>Total ritase : <?= $totalRitase ?></h2>
+                      <h2>Total Ritase : <?= --$x ?></h2>
+                      <h2>Total tonase : <?= $totalTonase ?></h2>
                       <h2>Pinjaman Uang : <?= $totalPinjaman?></h2>
                       <h2>Total Pembayaran : <?= $totalPembayaran ?></h2>
+                      <h2>Total Selisih : <?= (floatval($totalPinjaman) - floatval($totalPembayaran)) ?></h2>
                       <div class="clearfix"></div>
                     </div>
                   </div>                  
