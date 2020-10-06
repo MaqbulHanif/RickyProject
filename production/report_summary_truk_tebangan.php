@@ -4,52 +4,58 @@ include"head.php";
 include"header.php"; 
 
 if (isset($_POST['save'])) {
-  print_r($_POST);
-  // $query = $mysqli->query("
-  //   INSERT into truk
-  //   (
-  //     vendor_id,
-  //     truk_number
-  //   )
-  //   value
-  //   (
-  //     '$_POST[vendor_id]',
-  //     '$_POST[truk_number]'
-  //   )
-  //   ");
-  // $truk_id = mysqli_insert_id($mysqli);
-  // $query .= $mysqli->query("
-  //   INSERT into truk_log 
-  //   (
-  //      truk_id, 
-  //      nama_supir,
-  //      pinjaman_uang_jalan,
-  //      tgl_pinjaman_uang_jalan,
-  //      special_case,
-  //      location,
-  //      informasi,
-  //      tanggal_masuk,
-  //      tanggal_keluar
-  //   )
-  //   value
-  //   (
-  //     '$truk_id',
-  //     '$_POST[nama_supir]',
-  //     '$_POST[pinjaman_uang_jalan]',
-  //     '$_POST[tgl_pinjaman_uang_jalan]',
-  //     '$_POST[special_case]',
-  //     '$_POST[location]',
-  //     '$_POST[informasi]',
-  //     '$_POST[tanggal_masuk]',
-  //     '$_POST[tanggal_keluar]'
-  //     )");
-  // if(mysqli_multi_query($mysqli,$query)){
-  //   echo "Success";
-  // }
-  // else{
-  //   echo "Error :". $query . mysql_error($mysqli);
-  // }
-  // echo '<script>document.location="form"</script>';
+  $x = 1;
+  $from = $_POST['tanggal_bongkar_dari'];
+  $to = $_POST['tanggal_bongkar_sampai'];
+  $q1 = '';
+  $q2 = '';
+  $q3 = '';  
+  $q5 = '';
+
+  if($_POST['no_kendaraan'] != 'all') $q1 = $_POST['no_kendaraan']; else $q1 = '%';
+  if($_POST['vendor_name'] != 'all') $q2 = $_POST['vendor_name']; else $q2 = '%';
+  if($_POST['status'] != 'all') $q3 = $_POST['status']; else $q3 = '%';  
+  if($_POST['nota_number'] != 'all') $q5 = $_POST['nota_number']; else $q5 = '%';
+  
+  $q1 = "truk_number LIKE '" . $q1 ."'";
+  $q2 = "AND vendor_id LIKE '" . $q2."'";
+  $q3 = "AND truk_bongkar.bongkar_status LIKE '" . $q3."'";  
+  $q5 = "AND bongkar_nota LIKE '" . $q5."'";
+
+  $statement = "
+  SELECT truk_bongkar.*, truk.truk_number, vendor.vendor_name, 
+  truk_log.pinjaman_uang_jalan, truk_log.location, truk_log.information, truk_log.special_case
+  FROM truk_bongkar 
+  JOIN truk_log ON truk_log.truk_log_id=truk_bongkar.truk_log_id
+  JOIN truk ON truk.truk_id=truk_log.truk_id
+  JOIN vendor ON vendor.vendor_id=truk.vendor_id
+  WHERE (truk_bongkar.bongkar_date BETWEEN '".$from."' AND '".$to."') ".$q3." ".$q5." AND truk_bongkar.truk_log_id in (SELECT truk_log_id FROM truk_log WHERE truk_id in (SELECT truk_id FROM truk WHERE ".$q1." ".$q2." ))";   
+    
+
+  $dataList = $mysqli->query($statement);   
+  $q1 = '';
+  $q2 = '';
+  $q3 = '';  
+  $q5 = '';
+  
+
+  if($_POST['no_kendaraan'] != 'all') $q1 = $_POST['no_kendaraan']; else $q1 = '%';
+  if($_POST['vendor_name'] != 'all') $q2 = $_POST['vendor_name']; else $q2 = '%';
+  if($_POST['status'] != 'all') $q3 = $_POST['status']; else $q3 = '%';  
+  if($_POST['nota_number'] != 'all') $q5 = $_POST['nota_number']; else $q5 = '%';
+
+  $q1 = "tebangan_number LIKE '" . $q1 ."'";  
+  $q2 = "AND vendor_id LIKE '" . $q2."'";
+  $q3 = "AND tebangan_bongkar.bongkar_status LIKE '" . $q3."'";    
+  
+  $statement = "
+  SELECT tebangan_bongkar.*, tebangan.tebangan_number, vendor.vendor_name
+  FROM tebangan_bongkar   
+  JOIN tebangan ON tebangan.tebangan_id=tebangan_bongkar.tebangan_id
+  JOIN vendor ON vendor.vendor_id=tebangan.vendor_id
+  WHERE (tebangan_bongkar.bongkar_date BETWEEN '".$from."' AND '".$to."') ".$q3." AND tebangan_bongkar.tebangan_id in (SELECT tebangan_id FROM tebangan WHERE ".$q1." ".$q2." )";   
+  echo $statement;
+  $dataList1 = $mysqli->query($statement);  
 
 }
 
@@ -82,22 +88,28 @@ if (isset($_POST['save'])) {
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Kendaraan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="truk_number" class="form-control">
-                            <option value="" selected>Semua</option>
+                          <select name="no_kendaraan" class="form-control">
+                          <option value="all" selected>Semua</option>
+                              <?php
+                                $query = $mysqli->query("SELECT * FROM truk ");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['truk_number'] ?>"><?php echo $data['truk_number'];?></option>
+                            <?php } ?>                            
                             <?php
-                              $query = $mysqli->query("SELECT * FROM truk");
-                              while ($data = $query->fetch_array()) {
-                            ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['truk_number'];?></option>
-                          <?php } ?>
+                                $query = $mysqli->query("SELECT * FROM tebangan");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['tebangan_number'] ?>"><?php echo $data['tebangan_number'];?></option>
+                            <?php } ?>
                           </select>
                         </div>
                       </div> 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vendor/Subkon <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="vendor_id" class="form-control" disabled>
-                            <option value="all" selected>Semua</option>                            
+                          <select name="" class="form-control" disabled>
+                            <option value="all" selected>Semua</option>                              
                           </select>
                         </div>
                       </div>
@@ -105,13 +117,13 @@ if (isset($_POST['save'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Nota <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="nota_number" class="form-control">
-                            <option value="" selected>Semua</option>
+                            <option value="all" selected>Semua</option>                                                      
                             <?php
-                              $query = $mysqli->query("SELECT * FROM vendor");
-                              while ($data = $query->fetch_array()) {
-                            ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['vendor_name'];?></option>
-                          <?php } ?>
+                                $query = $mysqli->query("SELECT * FROM truk_bongkar");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['bongkar_nota'] ?>"><?php echo $data['bongkar_nota'];?></option>
+                            <?php } ?>
                           </select>
                         </div>
                       </div>
@@ -128,14 +140,14 @@ if (isset($_POST['save'])) {
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Vendor/Pemilik Truk<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="vendor_name" class="form-control">
-                            <option value="" selected>Semua</option>
-                            <?php
-                              $query = $mysqli->query("SELECT * FROM vendor");
-                              while ($data = $query->fetch_array()) {
-                            ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['vendor_name'];?></option>
-                          <?php } ?>
+                        <select name="vendor_name" class="form-control">
+                            <option value="all" selected>Semua</option>
+                              <?php
+                                $query = $mysqli->query("SELECT * FROM vendor");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['vendor_name'];?></option>
+                            <?php } ?> 
                           </select>
                         </div>
                       </div>   
@@ -168,48 +180,76 @@ if (isset($_POST['save'])) {
                     </form>                    
                   </div>                  
                 </div>
-                <div class="x_panel">
+                <?php if (isset($_POST['save'])) { ?>
+                  <div class="x_panel">
                     <div class="x_title">
                       <h2>Hasil</h2>                      
                       <div class="clearfix"></div>
-                    </div>
+                    </div>                    
                     <div class="x_content">                      
                       <table id="datatable-fixed-header" class="table table-striped table-bordered ">
                       <thead>
                           <tr>
                             <th>No</th>
-                            <th>Nama Subkon Tebang</th>
+                            <th>Tgl Masuk</th>
                             <th>Tgl Bongkar</th>
-                            <th>No. Kendaraan</th>                            
-                            <th>Tebangan Kayu Siapa</th>                                                        
-                            <th>Subkon</th> 
-                            <th>Status</th>
+                            <th>No. Nota</th>
+                            <th>Nama Vendor</th>
+                            <th>No. Kendaraan</th>                                                        
+                            <th>Status Bayar</th>
                             <th>Tonase</th>
                             <th>Total Pembayaran</th>
                             <th>Pinjaman Uang</th>
                             <th>Selisih</th>
+                            <th>Lokasi</th>
                             <th>Keterangan</th>
+                            <th>Spesial Case</th>
                           </tr>
                         </thead>
                         <tbody>
+                        <?php while ($row = $dataList->fetch_array()) {                          
+                          ?>
                           <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Tiger Nixon</td>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>                            
-                          </tr>                        
+                            <td><?= $x++; ?></td>
+                            <td><?= $row['created_at'] ?></td>
+                            <td><?= $row['bongkar_date'] ?></td>
+                            <td><?= $row['bongkar_nota'] ?></td>
+                            <td><?= $row['vendor_name'] ?></td>
+                            <td><?= $row['truk_number'] ?></td>
+                            <td><?= $row['bongkar_status'] ?></td>
+                            <td><?= $row['bongkar_tonase'] ?></td>
+                            <td><?= $row['bongkar_hasil_perluasan'] ?></td>
+                            <td><?= $row['pinjaman_uang_jalan'] ?></td>
+                            <td><?= (floatval($row['bongkar_hasil_perluasan']) - floatval($row['pinjaman_uang_jalan'])) ?></td>
+                            <td><?= $row['location'] ?></td>    
+                            <td><?= $row['information'] ?></td>              
+                            <td><?= $row['special_case'] ?></td>    
+                          </tr>  
+                        <?php } ?>                      
+                        <?php while ($row = $dataList1->fetch_array()) {                          
+                          ?>
+                          <tr>
+                            <td><?= $x++; ?></td>
+                            <td><?= $row['created_at'] ?></td>
+                            <td><?= $row['bongkar_date'] ?></td>
+                            <td>-</td>
+                            <td><?= $row['vendor_name'] ?></td>
+                            <td><?= $row['tebangan_number'] ?></td>
+                            <td><?= $row['bongkar_status'] ?></td>
+                            <td><?= $row['bongkar_tonase'] ?></td>
+                            <td><?= $row['bongkar_hasil_perluasan'] ?></td>
+                            <td><?= $row['pinjaman_uang_jalan'] ?></td>
+                            <td><?= (floatval($row['bongkar_hasil_perluasan']) - floatval($row['pinjaman_uang_jalan'])) ?></td>
+                            <td>-</td>    
+                            <td><?= $row['information'] ?></td>              
+                            <td><?= $row['special_case'] ?></td>    
+                          </tr>  
+                        <?php } ?> 
                         </tbody>                        
                       </table>
-                    </div>
-                  </div>
+                    </div>                    
+                  </div>                  
+                <?php } ?> 
               </div>
             </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Okt 2020 pada 04.22
+-- Waktu pembuatan: 06 Okt 2020 pada 06.26
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.10
 
@@ -33,7 +33,7 @@ CREATE TABLE `operasional` (
   `truk_id` int(11) DEFAULT NULL,
   `tebangan_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `operasional_date` datetime NOT NULL,
   `information` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `biaya` float NOT NULL,
@@ -54,7 +54,8 @@ INSERT INTO `operasional` (`operasional_id`, `truk_id`, `tebangan_id`, `created_
 (7, 7, NULL, '2020-10-04 17:00:00', '0000-00-00 00:00:00', '2020-10-05 00:00:00', 'Recusandae necessitatibus enim consequatur sed sed harum a omnis.', 613441, '/uploads/nota//889726808f0bfa8ec9313ea034e08d65.jpg'),
 (8, 8, NULL, '2020-10-04 17:00:00', '0000-00-00 00:00:00', '2020-10-05 00:00:00', 'Molestias quae ut commodi quia ipsum dolores.', 604160, '/uploads/nota//6971bb0612381cbb345c923ae2c63dab.jpg'),
 (9, 9, NULL, '2020-10-04 17:00:00', '0000-00-00 00:00:00', '2020-10-05 00:00:00', 'Consequatur ut sint optio earum.', 635139, '/uploads/nota//0f96036d734b56dc36a24feb6fc67a49.jpg'),
-(10, 10, NULL, '2020-10-04 17:00:00', '0000-00-00 00:00:00', '2020-10-05 00:00:00', 'Mollitia est autem assumenda iusto voluptas eaque.', 918791, '/uploads/nota//20b8d4b202a9b639d2dd992caa9855b3.jpg');
+(10, 10, NULL, '2020-10-04 17:00:00', '0000-00-00 00:00:00', '2020-10-05 00:00:00', 'Mollitia est autem assumenda iusto voluptas eaque.', 918791, '/uploads/nota//20b8d4b202a9b639d2dd992caa9855b3.jpg'),
+(18, 0, 12, '2020-10-06 03:23:55', '2020-10-06 03:23:55', '2020-10-07 00:00:00', 'sdadasdasdas', 15100000, '/uploads/nota/dkwaokoawdaw.jpg');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `tebangan` (
   `tebangan_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `vendor_id` int(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -112,37 +113,38 @@ CREATE TABLE `tebangan_bongkar` (
   `pinjaman_uang_jalan` float NOT NULL,
   `bongkar_hasil_perluasan` float DEFAULT NULL,
   `bongkar_tebangan_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bongkar_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Tidak Lunas',
   `information` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `special_case` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data untuk tabel `tebangan_bongkar`
 --
 
-INSERT INTO `tebangan_bongkar` (`tebangan_log_id`, `tebangan_id`, `bongkar_date`, `bongkar_tonase`, `bongkar_nota_filename`, `bongkar_harga_tonase`, `pinjaman_uang_jalan`, `bongkar_hasil_perluasan`, `bongkar_tebangan_name`, `information`, `special_case`, `created_at`, `updated_at`) VALUES
-(1, 1, '2020-10-05 00:00:00', 93, '/uploads/nota/5df112bf1c986e3c23bf697550859529.jpg', 25450200, 167778, 31832100, 'Sincere', 'Quia nostrum minus soluta id qui aut.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(2, 2, '2020-10-05 00:00:00', 29, '/uploads/nota/2c26d55b11e0fd548154fa4ee24d7505.jpg', 20432300, 739058, 47592000, 'Alvena', 'Unde itaque repellat aperiam temporibus non voluptate iure.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(3, 3, '2020-10-05 00:00:00', 2, '/uploads/nota/9a04de57100b604f5d85f752fffeaf09.jpg', 11506800, 889362, 28465100, 'Aidan', 'Dicta cum et aliquid sed aut veniam dignissimos.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(4, 4, '2020-10-05 00:00:00', 45, '/uploads/nota/a6a61ed90301749c192644115920bc43.jpg', 17476500, 846061, 65508000, 'Lafayette', 'Molestias dolores in explicabo et perferendis qui iure.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(5, 5, '2020-10-05 00:00:00', 17, '/uploads/nota/761b03995ca879c8612161a79064e4a8.jpg', 49504000, 660441, 26187100, 'Anderson', 'Et repellat nam eum voluptatibus possimus.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(6, 6, '2020-10-05 00:00:00', 55, '/uploads/nota/a621bdce07f5126e82616ccb2df1e686.jpg', 23572600, 998929, 73735400, 'Raegan', 'In necessitatibus qui laboriosam debitis doloremque error.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(7, 7, '2020-10-05 00:00:00', 83, '/uploads/nota/23a30869847365aa58d5f58cd5292baf.jpg', 40364600, 599826, 56700000, 'Norris', 'Est error eos nisi et maxime officia maiores nisi.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(8, 8, '2020-10-05 00:00:00', 58, '/uploads/nota/58be9f85284824322dc7fd76c80a03cc.jpg', 44639200, 963043, 37140700, 'Shaylee', 'A dolores amet cumque beatae.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(9, 9, '2020-10-05 00:00:00', 22, '/uploads/nota/c00c9b0957951fea7145d7aa8d626d47.jpg', 16266300, 927667, 90381600, 'Kennith', 'Est voluptatibus numquam et veritatis ut repudiandae.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(10, 10, '2020-10-05 00:00:00', 84, '/uploads/nota/ee0f9094a1ce99a68bca25d0242a7dfd.jpg', 43923500, 878822, 53890600, 'Lisandro', 'Minima qui quia id harum ratione eveniet quaerat dolorem.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(11, 11, '2020-10-05 00:00:00', 7, '/uploads/nota/e1ae7f9ac4df85a4d6fce12aafa5548b.jpg', 17491800, 281254, 43232000, 'Velva', 'Nulla consectetur nesciunt est numquam.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(12, 12, '2020-10-05 00:00:00', 30, '/uploads/nota/8ac6346256474bbe5b35e8b1b35b3768.jpg', 12799800, 489091, 98871100, 'Karli', 'Maiores suscipit vel soluta repellat omnis.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(13, 13, '2020-10-05 00:00:00', 52, '/uploads/nota/59a8b8197155d43dc9dfec9131d5b481.jpg', 37714300, 813185, 20919500, 'Elton', 'Nisi nam totam quod et laudantium et.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(14, 14, '2020-10-05 00:00:00', 35, '/uploads/nota/52d853794a0ba24f9cd231d6ac66135a.jpg', 32610300, 899750, 61819700, 'Emelia', 'Consectetur enim ut earum laudantium.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(15, 15, '2020-10-05 00:00:00', 69, '/uploads/nota/790bce3f0903d4da723bbdaa1826716f.jpg', 9215960, 525679, 84226400, 'Randal', 'Eos vel consequatur debitis at placeat.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(16, 16, '2020-10-05 00:00:00', 79, '/uploads/nota/854934e194d0e57fe08acce03d2eb90f.jpg', 42687000, 532702, 13056900, 'Kameron', 'Dolorem ea enim et eveniet alias soluta voluptatem.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(17, 17, '2020-10-05 00:00:00', 91, '/uploads/nota/9a54e971eef0a410cce3b8d6320fe54a.jpg', 10927500, 465437, 97225100, 'Regan', 'Dolorem et eos ut non blanditiis.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(18, 18, '2020-10-05 00:00:00', 25, '/uploads/nota/f01f6de53fccb049a1705882a8620a74.jpg', 20043600, 111127, 87282400, 'Jazmin', 'Enim odio asperiores rerum.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(19, 19, '2020-10-05 00:00:00', 10, '/uploads/nota/037551f92a0bb66d7bbcd43d9af8c54d.jpg', 9229420, 689349, 82641100, 'Judson', 'Numquam ut natus quia impedit necessitatibus impedit mollitia.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(20, 20, '2020-10-05 00:00:00', 76, '/uploads/nota/d32adda397eaa4518d841c550298f67f.jpg', 14518700, 794337, 42240100, 'Tevin', 'Voluptas quis accusamus aspernatur animi repellendus libero minus.', 0, '2020-10-04 17:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tebangan_bongkar` (`tebangan_log_id`, `tebangan_id`, `bongkar_date`, `bongkar_tonase`, `bongkar_nota_filename`, `bongkar_harga_tonase`, `pinjaman_uang_jalan`, `bongkar_hasil_perluasan`, `bongkar_tebangan_name`, `bongkar_status`, `information`, `special_case`, `created_at`, `updated_at`) VALUES
+(1, 1, '2020-10-05 00:00:00', 93, '/uploads/nota/5df112bf1c986e3c23bf697550859529.jpg', 25450200, 167778, 31832100, 'Sincere', 'Lunas', 'Quia nostrum minus soluta id qui aut.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(2, 2, '2020-10-05 00:00:00', 29, '/uploads/nota/2c26d55b11e0fd548154fa4ee24d7505.jpg', 20432300, 739058, 47592000, 'Alvena', 'Lunas', 'Unde itaque repellat aperiam temporibus non voluptate iure.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(3, 3, '2020-10-05 00:00:00', 2, '/uploads/nota/9a04de57100b604f5d85f752fffeaf09.jpg', 11506800, 889362, 28465100, 'Aidan', 'Lunas', 'Dicta cum et aliquid sed aut veniam dignissimos.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(4, 4, '2020-10-05 00:00:00', 45, '/uploads/nota/a6a61ed90301749c192644115920bc43.jpg', 17476500, 846061, 65508000, 'Lafayette', 'Lunas', 'Molestias dolores in explicabo et perferendis qui iure.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(5, 5, '2020-10-05 00:00:00', 17, '/uploads/nota/761b03995ca879c8612161a79064e4a8.jpg', 49504000, 660441, 26187100, 'Anderson', 'Lunas', 'Et repellat nam eum voluptatibus possimus.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(6, 6, '2020-10-05 00:00:00', 55, '/uploads/nota/a621bdce07f5126e82616ccb2df1e686.jpg', 23572600, 998929, 73735400, 'Raegan', 'Lunas', 'In necessitatibus qui laboriosam debitis doloremque error.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(7, 7, '2020-10-05 00:00:00', 83, '/uploads/nota/23a30869847365aa58d5f58cd5292baf.jpg', 40364600, 599826, 56700000, 'Norris', 'Lunas', 'Est error eos nisi et maxime officia maiores nisi.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(8, 8, '2020-10-05 00:00:00', 58, '/uploads/nota/58be9f85284824322dc7fd76c80a03cc.jpg', 44639200, 963043, 37140700, 'Shaylee', 'Lunas', 'A dolores amet cumque beatae.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(9, 9, '2020-10-05 00:00:00', 22, '/uploads/nota/c00c9b0957951fea7145d7aa8d626d47.jpg', 16266300, 927667, 90381600, 'Kennith', 'Lunas', 'Est voluptatibus numquam et veritatis ut repudiandae.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(10, 10, '2020-10-05 00:00:00', 84, '/uploads/nota/ee0f9094a1ce99a68bca25d0242a7dfd.jpg', 43923500, 878822, 53890600, 'Lisandro', 'Lunas', 'Minima qui quia id harum ratione eveniet quaerat dolorem.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(11, 11, '2020-10-05 00:00:00', 7, '/uploads/nota/e1ae7f9ac4df85a4d6fce12aafa5548b.jpg', 17491800, 281254, 43232000, 'Velva', 'Lunas', 'Nulla consectetur nesciunt est numquam.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(12, 12, '2020-10-05 00:00:00', 30, '/uploads/nota/8ac6346256474bbe5b35e8b1b35b3768.jpg', 12799800, 489091, 98871100, 'Karli', 'Lunas', 'Maiores suscipit vel soluta repellat omnis.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(13, 13, '2020-10-05 00:00:00', 52, '/uploads/nota/59a8b8197155d43dc9dfec9131d5b481.jpg', 37714300, 813185, 20919500, 'Elton', 'Lunas', 'Nisi nam totam quod et laudantium et.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(14, 14, '2020-10-05 00:00:00', 35, '/uploads/nota/52d853794a0ba24f9cd231d6ac66135a.jpg', 32610300, 899750, 61819700, 'Emelia', 'Lunas', 'Consectetur enim ut earum laudantium.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(15, 15, '2020-10-05 00:00:00', 69, '/uploads/nota/790bce3f0903d4da723bbdaa1826716f.jpg', 9215960, 525679, 84226400, 'Randal', 'Lunas', 'Eos vel consequatur debitis at placeat.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(16, 16, '2020-10-05 00:00:00', 79, '/uploads/nota/854934e194d0e57fe08acce03d2eb90f.jpg', 42687000, 532702, 13056900, 'Kameron', 'Lunas', 'Dolorem ea enim et eveniet alias soluta voluptatem.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(17, 17, '2020-10-05 00:00:00', 91, '/uploads/nota/9a54e971eef0a410cce3b8d6320fe54a.jpg', 10927500, 465437, 97225100, 'Regan', 'Lunas', 'Dolorem et eos ut non blanditiis.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(18, 18, '2020-10-05 00:00:00', 25, '/uploads/nota/f01f6de53fccb049a1705882a8620a74.jpg', 20043600, 111127, 87282400, 'Jazmin', 'Lunas', 'Enim odio asperiores rerum.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(19, 19, '2020-10-05 00:00:00', 10, '/uploads/nota/037551f92a0bb66d7bbcd43d9af8c54d.jpg', 9229420, 689349, 82641100, 'Judson', 'Lunas', 'Numquam ut natus quia impedit necessitatibus impedit mollitia.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00'),
+(20, 20, '2020-10-05 00:00:00', 76, '/uploads/nota/d32adda397eaa4518d841c550298f67f.jpg', 14518700, 794337, 42240100, 'Tevin', 'Lunas', 'Voluptas quis accusamus aspernatur animi repellendus libero minus.', 0, '2020-10-06 02:37:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,7 @@ CREATE TABLE `truk` (
   `truk_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `vendor_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -200,9 +202,9 @@ CREATE TABLE `truk_bongkar` (
   `bongkar_harga_tonase` float DEFAULT NULL,
   `bongkar_hasil_perluasan` float NOT NULL,
   `bongkar_tebangan_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `bongkar_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bongkar_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Tidak Lunas',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -210,36 +212,36 @@ CREATE TABLE `truk_bongkar` (
 --
 
 INSERT INTO `truk_bongkar` (`bongkar_truk_id`, `truk_log_id`, `bongkar_date`, `bongkar_nota`, `bongkar_nota_filename`, `bongkar_tonase`, `bongkar_harga_tonase`, `bongkar_hasil_perluasan`, `bongkar_tebangan_name`, `bongkar_status`, `created_at`, `updated_at`) VALUES
-(1, 1, '2020-10-05 00:00:00', 'NOTA5120XXX', '/uploads/nota/11a355f9e367ff9d8c07623d69fc302a.jpg', 39, 20649600, 74924900, 'Ahmad', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(2, 2, '2020-10-05 00:00:00', 'NOTA6088XXX', '/uploads/nota/4ce93b92c9d2265a37e8631d88c9b72b.jpg', 21, 35030800, 24934100, 'Ellen', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(3, 3, '2020-10-05 00:00:00', 'NOTA7501XXX', '/uploads/nota/c0a914d418a5567968ea2bf8b18233bb.jpg', 10, 38024800, 54349500, 'Charlotte', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(4, 4, '2020-10-05 00:00:00', 'NOTA6884XXX', '/uploads/nota/96129ed004a7fe9673522d895836f40a.jpg', 100, 39396500, 55605000, 'Tomas', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(5, 5, '2020-10-05 00:00:00', 'NOTA1147XXX', '/uploads/nota/4a801c1b250b2c68b317999ece3754c2.jpg', 58, 12892400, 39966500, 'Savanna', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(6, 6, '2020-10-05 00:00:00', 'NOTA9498XXX', '/uploads/nota/d64011f7f3e76df4ac930b6ab9f03f66.jpg', 90, 42047500, 40846500, 'Reginald', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(7, 7, '2020-10-05 00:00:00', 'NOTA8802XXX', '/uploads/nota/0759d50fcb5f1b070667b825f44cd57f.jpg', 66, 18689900, 85459700, 'Manley', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(8, 8, '2020-10-05 00:00:00', 'NOTA9420XXX', '/uploads/nota/10fbbb2cbd83cbe4f4b84be5ea9713b4.jpg', 33, 35932400, 69939200, 'Foster', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(9, 9, '2020-10-05 00:00:00', 'NOTA3994XXX', '/uploads/nota/752a1d3b99af1cd7396bc75e85fa75ef.jpg', 79, 34382600, 99692800, 'Jay', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(10, 10, '2020-10-05 00:00:00', 'NOTA9984XXX', '/uploads/nota/59c00bb486cfa2c88e00f7e3010b40a1.jpg', 11, 33613200, 43985100, 'Aidan', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(11, 11, '2020-10-05 00:00:00', 'NOTA9285XXX', '/uploads/nota/d5fd94e50996f82092321e6978411556.jpg', 65, 35839300, 62801700, 'Zackary', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(12, 12, '2020-10-05 00:00:00', 'NOTA6886XXX', '/uploads/nota/4492682212a1d3929f6272e4621552f3.jpg', 28, 39740300, 88929500, 'Gerard', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(13, 13, '2020-10-05 00:00:00', 'NOTA0181XXX', '/uploads/nota/26119c887789f9f8f3f9b493e95a0ff1.jpg', 5, 20113100, 85926800, 'Woodrow', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(14, 14, '2020-10-05 00:00:00', 'NOTA9335XXX', '/uploads/nota/314891b4997bfaaaf39597e6b0b05c93.jpg', 47, 38264600, 66330800, 'Karli', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(15, 15, '2020-10-05 00:00:00', 'NOTA4949XXX', '/uploads/nota/9ad79d445133573baa219f312b800e24.jpg', 14, 17304500, 52342600, 'Ulises', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(16, 16, '2020-10-05 00:00:00', 'NOTA2027XXX', '/uploads/nota/aa4a11e3968e05c35f98eacbb0989c65.jpg', 1, 30037600, 45063200, 'Elwin', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(17, 17, '2020-10-05 00:00:00', 'NOTA0345XXX', '/uploads/nota/b7d3a9ce91b58c511cfdc5bc51cb7a85.jpg', 47, 38100100, 17563600, 'Hulda', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(18, 18, '2020-10-05 00:00:00', 'NOTA4559XXX', '/uploads/nota/8b5ae91d4cbeb1a6a65c472a95a8d8ba.jpg', 50, 17111000, 48812200, 'Aileen', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(19, 19, '2020-10-05 00:00:00', 'NOTA4478XXX', '/uploads/nota/9b7bf9a51757cff1746058aec344c66a.jpg', 93, 14247700, 12665600, 'Ellis', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(20, 20, '2020-10-05 00:00:00', 'NOTA7346XXX', '/uploads/nota/a5e99fc88ee99f255672aad70292218e.jpg', 3, 30536100, 85840000, 'Warren', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(21, 21, '2020-10-05 00:00:00', 'NOTA0148XXX', '/uploads/nota/7bfa8afbd1c7dcad905ddef9e31ab1c8.jpg', 92, 21599400, 20370600, 'Zack', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(22, 22, '2020-10-05 00:00:00', 'NOTA0207XXX', '/uploads/nota/d3711d0a86d43020a818a6dd62f115c6.jpg', 35, 23100500, 18139000, 'Blaise', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(23, 23, '2020-10-05 00:00:00', 'NOTA5917XXX', '/uploads/nota/66403b008ba3ef6dc50322e6b2e7a290.jpg', 17, 30140200, 49131100, 'Kim', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(24, 24, '2020-10-05 00:00:00', 'NOTA4264XXX', '/uploads/nota/86db7280e71ca4a8419b3436d3c123a4.jpg', 7, 20772700, 65153300, 'Anissa', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(25, 25, '2020-10-05 00:00:00', 'NOTA3042XXX', '/uploads/nota/c1a95235a2d9b0062a49fdc898607b3e.jpg', 40, 28029000, 96591900, 'Keven', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(26, 26, '2020-10-05 00:00:00', 'NOTA7227XXX', '/uploads/nota/6dc7ef1df14878ee16324851b63f92e0.jpg', 6, 33494400, 84280500, 'Destinee', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(27, 27, '2020-10-05 00:00:00', 'NOTA8366XXX', '/uploads/nota/a4d66f0b7e8fe060ea0f97dd6d8e89f7.jpg', 93, 15511800, 21135500, 'Shakira', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(28, 28, '2020-10-05 00:00:00', 'NOTA7180XXX', '/uploads/nota/e97225347339bc5358357bc41ce689be.jpg', 60, 24720200, 52718200, 'Major', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(29, 29, '2020-10-05 00:00:00', 'NOTA8349XXX', '/uploads/nota/e3efed3dbc35a50c4554b967a61e14ae.jpg', 12, 26960800, 92056000, 'Danika', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00'),
-(30, 30, '2020-10-05 00:00:00', 'NOTA5388XXX', '/uploads/nota/f081c694739576c490492ed502659b25.jpg', 19, 9411870, 61433800, 'Lilliana', '', '2020-10-04 17:00:00', '0000-00-00 00:00:00');
+(1, 1, '2020-10-05 00:00:00', 'NOTA5120XXX', '/uploads/nota/11a355f9e367ff9d8c07623d69fc302a.jpg', 39, 20649600, 74924900, 'Ahmad', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(2, 2, '2020-10-05 00:00:00', 'NOTA6088XXX', '/uploads/nota/4ce93b92c9d2265a37e8631d88c9b72b.jpg', 21, 35030800, 24934100, 'Ellen', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(3, 3, '2020-10-05 00:00:00', 'NOTA7501XXX', '/uploads/nota/c0a914d418a5567968ea2bf8b18233bb.jpg', 10, 38024800, 54349500, 'Charlotte', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(4, 4, '2020-10-05 00:00:00', 'NOTA6884XXX', '/uploads/nota/96129ed004a7fe9673522d895836f40a.jpg', 100, 39396500, 55605000, 'Tomas', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(5, 5, '2020-10-05 00:00:00', 'NOTA1147XXX', '/uploads/nota/4a801c1b250b2c68b317999ece3754c2.jpg', 58, 12892400, 39966500, 'Savanna', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(6, 6, '2020-10-05 00:00:00', 'NOTA9498XXX', '/uploads/nota/d64011f7f3e76df4ac930b6ab9f03f66.jpg', 90, 42047500, 40846500, 'Reginald', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(7, 7, '2020-10-05 00:00:00', 'NOTA8802XXX', '/uploads/nota/0759d50fcb5f1b070667b825f44cd57f.jpg', 66, 18689900, 85459700, 'Manley', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(8, 8, '2020-10-05 00:00:00', 'NOTA9420XXX', '/uploads/nota/10fbbb2cbd83cbe4f4b84be5ea9713b4.jpg', 33, 35932400, 69939200, 'Foster', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(9, 9, '2020-10-05 00:00:00', 'NOTA3994XXX', '/uploads/nota/752a1d3b99af1cd7396bc75e85fa75ef.jpg', 79, 34382600, 99692800, 'Jay', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(10, 10, '2020-10-05 00:00:00', 'NOTA9984XXX', '/uploads/nota/59c00bb486cfa2c88e00f7e3010b40a1.jpg', 11, 33613200, 43985100, 'Aidan', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(11, 11, '2020-10-05 00:00:00', 'NOTA9285XXX', '/uploads/nota/d5fd94e50996f82092321e6978411556.jpg', 65, 35839300, 62801700, 'Zackary', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(12, 12, '2020-10-05 00:00:00', 'NOTA6886XXX', '/uploads/nota/4492682212a1d3929f6272e4621552f3.jpg', 28, 39740300, 88929500, 'Gerard', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(13, 13, '2020-10-05 00:00:00', 'NOTA0181XXX', '/uploads/nota/26119c887789f9f8f3f9b493e95a0ff1.jpg', 5, 20113100, 85926800, 'Woodrow', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(14, 14, '2020-10-05 00:00:00', 'NOTA9335XXX', '/uploads/nota/314891b4997bfaaaf39597e6b0b05c93.jpg', 47, 38264600, 66330800, 'Karli', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(15, 15, '2020-10-05 00:00:00', 'NOTA4949XXX', '/uploads/nota/9ad79d445133573baa219f312b800e24.jpg', 14, 17304500, 52342600, 'Ulises', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(16, 16, '2020-10-05 00:00:00', 'NOTA2027XXX', '/uploads/nota/aa4a11e3968e05c35f98eacbb0989c65.jpg', 1, 30037600, 45063200, 'Elwin', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(17, 17, '2020-10-05 00:00:00', 'NOTA0345XXX', '/uploads/nota/b7d3a9ce91b58c511cfdc5bc51cb7a85.jpg', 47, 38100100, 17563600, 'Hulda', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(18, 18, '2020-10-05 00:00:00', 'NOTA4559XXX', '/uploads/nota/8b5ae91d4cbeb1a6a65c472a95a8d8ba.jpg', 50, 17111000, 48812200, 'Aileen', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(19, 19, '2020-10-05 00:00:00', 'NOTA4478XXX', '/uploads/nota/9b7bf9a51757cff1746058aec344c66a.jpg', 93, 14247700, 12665600, 'Ellis', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(20, 20, '2020-10-05 00:00:00', 'NOTA7346XXX', '/uploads/nota/a5e99fc88ee99f255672aad70292218e.jpg', 3, 30536100, 85840000, 'Warren', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(21, 21, '2020-10-05 00:00:00', 'NOTA0148XXX', '/uploads/nota/7bfa8afbd1c7dcad905ddef9e31ab1c8.jpg', 92, 21599400, 20370600, 'Zack', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(22, 22, '2020-10-05 00:00:00', 'NOTA0207XXX', '/uploads/nota/d3711d0a86d43020a818a6dd62f115c6.jpg', 35, 23100500, 18139000, 'Blaise', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(23, 23, '2020-10-05 00:00:00', 'NOTA5917XXX', '/uploads/nota/66403b008ba3ef6dc50322e6b2e7a290.jpg', 17, 30140200, 49131100, 'Kim', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(24, 24, '2020-10-05 00:00:00', 'NOTA4264XXX', '/uploads/nota/86db7280e71ca4a8419b3436d3c123a4.jpg', 7, 20772700, 65153300, 'Anissa', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(25, 25, '2020-10-05 00:00:00', 'NOTA3042XXX', '/uploads/nota/c1a95235a2d9b0062a49fdc898607b3e.jpg', 40, 28029000, 96591900, 'Keven', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(26, 26, '2020-10-05 00:00:00', 'NOTA7227XXX', '/uploads/nota/6dc7ef1df14878ee16324851b63f92e0.jpg', 6, 33494400, 84280500, 'Destinee', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(27, 27, '2020-10-05 00:00:00', 'NOTA8366XXX', '/uploads/nota/a4d66f0b7e8fe060ea0f97dd6d8e89f7.jpg', 93, 15511800, 21135500, 'Shakira', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(28, 28, '2020-10-05 00:00:00', 'NOTA7180XXX', '/uploads/nota/e97225347339bc5358357bc41ce689be.jpg', 60, 24720200, 52718200, 'Major', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(29, 29, '2020-10-05 00:00:00', 'NOTA8349XXX', '/uploads/nota/e3efed3dbc35a50c4554b967a61e14ae.jpg', 12, 26960800, 92056000, 'Danika', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00'),
+(30, 30, '2020-10-05 00:00:00', 'NOTA5388XXX', '/uploads/nota/f081c694739576c490492ed502659b25.jpg', 19, 9411870, 61433800, 'Lilliana', 'Lunas', '2020-10-06 02:33:30', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -258,8 +260,8 @@ CREATE TABLE `truk_log` (
   `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `information` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `special_case` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -328,7 +330,7 @@ CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -418,7 +420,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT untuk tabel `operasional`
 --
 ALTER TABLE `operasional`
-  MODIFY `operasional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `operasional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tebangan`

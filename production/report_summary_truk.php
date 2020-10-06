@@ -17,19 +17,19 @@ if (isset($_POST['save'])) {
   if($_POST['status'] != 'all') $q3 = $_POST['status']; else $q3 = '%';  
   if($_POST['nota_number'] != 'all') $q5 = $_POST['nota_number']; else $q5 = '%';
   
-  $q1 = "truk_number LIKE '" . $q1 ."'";
+  $q1 = "truk_id LIKE '" . $q1 ."'";
   $q2 = "AND vendor_id LIKE '" . $q2."'";
-  $q3 = "AND bongkar_log.bongkar_status LIKE '" . $q3."'";  
+  $q3 = "AND truk_bongkar.bongkar_status LIKE '" . $q3."'";  
   $q5 = "AND bongkar_nota LIKE '" . $q5."'";
 
   $statement = "
-  SELECT bongkar_log.*, truk.truk_number, vendor.vendor_name, 
-  truk_log.pinjaman_uang_jalan, truk_log.location
-  FROM bongkar_log 
-  JOIN truk_log ON truk_log.truk_log_id=bongkar_log.truk_log_id
+  SELECT truk_bongkar.*, truk.truk_number, vendor.vendor_name, 
+  truk_log.pinjaman_uang_jalan, truk_log.location, truk_log.information, truk_log.special_case
+  FROM truk_bongkar 
+  JOIN truk_log ON truk_log.truk_log_id=truk_bongkar.truk_log_id
   JOIN truk ON truk.truk_id=truk_log.truk_id
   JOIN vendor ON vendor.vendor_id=truk.vendor_id
-  WHERE (bongkar_log.bongkar_date BETWEEN '".$from."' AND '".$to."') ".$q3." ".$q5." AND bongkar_log.truk_log_id in (SELECT truk_log_id FROM truk_log WHERE truk_id in (SELECT truk_id FROM truk WHERE ".$q1." ".$q2." ))";   
+  WHERE (truk_bongkar.bongkar_date BETWEEN '".$from."' AND '".$to."') ".$q3." ".$q5." AND truk_bongkar.truk_log_id in (SELECT truk_log_id FROM truk_log WHERE truk_id in (SELECT truk_id FROM truk WHERE ".$q1." ".$q2." ))";   
       
   $dataList = $mysqli->query($statement);  
 
@@ -100,7 +100,7 @@ if (isset($_POST['save'])) {
                           <select name="nota_number" class="form-control" required>
                               <option value="all" selected>Semua</option>
                               <?php
-                                $query = $mysqli->query("SELECT * FROM bongkar_log");
+                                $query = $mysqli->query("SELECT * FROM truk_bongkar");
                                 while ($data = $query->fetch_array()) {
                               ?> 
                               <option value="<?php echo $data['bongkar_nota'] ?>"><?php echo $data['bongkar_nota'];?></option>
@@ -151,11 +151,7 @@ if (isset($_POST['save'])) {
                     </form>                    
                   </div>                  
                 </div>
-                <?php if (isset($_POST['save'])) { 
-                  $totalRitase = 0;
-                  $totalPinjaman = 0; 
-                  $totalPembayaran = 0;                   
-                ?>
+                <?php if (isset($_POST['save'])) { ?>
                   <div class="x_panel">
                     <div class="x_title">
                       <h2>Hasil</h2>                      
@@ -182,10 +178,7 @@ if (isset($_POST['save'])) {
                           </tr>
                         </thead>
                         <tbody>
-                        <?php while ($row = $dataList->fetch_array()) {
-                          $totalRitase += floatval($row['bongkar_tonase']);
-                          $totalPembayaran += floatval($row['bongkar_hasil_perluasan']);
-                          $totalPinjaman += floatval($row['pinjaman_uang_jalan']);
+                        <?php while ($row = $dataList->fetch_array()) {                          
                           ?>
                           <tr>
                             <td><?= $x++; ?></td>

@@ -1,7 +1,33 @@
 <?php
 $page = 'home';
 include"head.php";
-include"header.php" ?>
+include"header.php";
+
+if (isset($_POST['save'])) {
+  $x = 1;  
+  $q1 = '';
+  $q2 = '';
+  
+  if($_POST['no_kendaraan'] != 'all') $q1 = $_POST['no_kendaraan']; else $q1 = '%';  
+  if($_POST['no_kendaraan'] != 'all') $q2 = $_POST['no_kendaraan']; else $q2 = '%';  
+  
+  $q1 = "operasional.truk_id LIKE '" . $q1 ."'";
+  $q2 = "operasional.tebangan_id LIKE '".$q2."'";
+
+  $statement = "SELECT operasional.*, truk.* FROM operasional 
+  JOIN truk ON truk.truk_id=operasional.truk_id   
+  WHERE ".$q1." "; 
+  
+  $statement1 = "SELECT operasional.*, tebangan.* FROM operasional   
+  JOIN tebangan ON tebangan.tebangan_id=operasional.tebangan_id
+  WHERE ".$q2." ";     
+
+  $dataList = $mysqli->query($statement);  
+  $dataList1 = $mysqli->query($statement1);  
+
+}
+
+?>
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -28,10 +54,23 @@ include"header.php" ?>
                     <br />
                     <form action="" method="post" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">No. Kendaraan <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No Kendaraan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="No-Kendaraan" required="required" name="truk_number" class="form-control col-md-7 col-xs-12">
+                          <select name="no_kendaraan" class="form-control" required>
+                            <option value="all" selected>Semua</option>
+                              <?php
+                                $query = $mysqli->query("SELECT truk.* FROM operasional JOIN truk ON truk.truk_id=operasional.truk_id");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['truk_id'] ?>"><?php echo $data['truk_number'];?></option>
+                            <?php } ?>                            
+                            <?php
+                                $query = $mysqli->query("SELECT tebangan.* FROM operasional JOIN tebangan ON tebangan.tebangan_id=operasional.tebangan_id");
+                                while ($data = $query->fetch_array()) {
+                              ?> 
+                              <option value="<?php echo $data['tebangan_id'] ?>"><?php echo $data['tebangan_number'];?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                       </div> 
                       <div class="ln_solid"></div>
@@ -43,36 +82,47 @@ include"header.php" ?>
                     </form>                    
                   </div>                  
                 </div>
-                <div class="x_panel">
+                <?php if (isset($_POST['save'])) { ?>
+                  <div class="x_panel">
                     <div class="x_title">
-                      <h2>Tabel</h2>                      
+                      <h2>Hasil</h2>                      
                       <div class="clearfix"></div>
-                    </div>
+                    </div>                    
                     <div class="x_content">                      
-                      <table id="datatable-fixed-header" class="table table-striped table-bordered">
-                        <thead>
+                      <table id="datatable-fixed-header" class="table table-striped table-bordered ">
+                      <thead>
                           <tr>
                             <th>No</th>
-                            <th>No. Kendaraan</th>
-                            <th>Tanggal</th>
+                            <th>No Kendaraan</th>
+                            <th>Tgl Masuk</th>
                             <th>Keterangan</th>
                             <th>Biaya</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
+                        <?php while ($row = $dataList->fetch_array()) {?>
                           <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                          </tr>                        
-                        </tbody>
+                            <td><?= $x++; ?></td>
+                            <td><?= $row['truk_number'] ?></td>   
+                            <td><?= $row['created_at'] ?></td>                                                     
+                            <td><?= $row['information'] ?></td>
+                            <td><?= $row['biaya'] ?></td>                             
+                          </tr>  
+                        <?php } ?>
+                        <?php while ($row = $dataList1->fetch_array()) {?>
+                          <tr>
+                            <td><?= $x++; ?></td>
+                            <td><?= $row['tebangan_number'] ?></td>                            
+                            <td><?= $row['created_at'] ?></td>                            
+                            <td><?= $row['information'] ?></td>
+                            <td><?= $row['biaya'] ?></td>                             
+                          </tr>  
+                        <?php } ?>                          
+                        </tbody>                        
                       </table>
-                    </div>
-                  </div>
+                    </div>                    
+                  </div>                  
+                <?php } ?> 
               </div>
             </div>
 
