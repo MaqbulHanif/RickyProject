@@ -135,9 +135,9 @@ if (isset($_POST['save'])) {
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             
-                              <input type="radio" name="special_case" value="1"> Yes
+                              <input type="radio" name="special_case" value="Yes"> Yes
                             
-                              <input type="radio" name="special_case" value="0" checked> No
+                              <input type="radio" name="special_case" value="No" checked> No
                             
                           </div>
                         </div>

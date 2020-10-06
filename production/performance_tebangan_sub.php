@@ -166,6 +166,7 @@ if (isset($_POST['save'])) {
                               <th>Subkon</th>
                               <th>Status</th>
                               <th>Tonase</th>
+                              <th>Pinjaman Uang</th>
                               <th>Total Pembayaran</th>
                               <th>Selisih</th>
                               <th>Keterangan</th>
@@ -186,6 +187,7 @@ if (isset($_POST['save'])) {
                               <td>Subkon</td>
                               <td><?= $row['bongkar_status'] ?></td>
                               <td><?= $row['bongkar_tonase'] ?></td>
+                              <td><?= $row['pinjaman_uang_jalan'] ?></td>
                               <td><?= $row['bongkar_hasil_perluasan'] ?></td>                              
                               <td><?= (floatval($row['bongkar_hasil_perluasan']) - floatval($row['pinjaman_uang_jalan'])) ?></td>                              
                               <td><?= $row['information'] ?></td>              
