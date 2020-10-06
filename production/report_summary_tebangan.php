@@ -13,17 +13,17 @@ if (isset($_POST['save'])) {
   $q4 = '';
   $q5 = '';
 
-  // if($_POST['no_kendaraan'] != 'all') $q1 = $_POST['no_kendaraan']; else $q1 = '%';
+  // if($_POST['truk_number'] != 'all') $q1 = $_POST['truk_number']; else $q1 = '%';
   if($_POST['subkontraktor_name'] != 'all') $q2 = $_POST['subkontraktor_name']; else $q2 = '%';
   if($_POST['status'] != 'all') $q3 = $_POST['status']; else $q3 = '%';
   // if($_POST['special_case'] != 'all') $q4 = $_POST['special_case']; else $q4 = '%';  
   if($_POST['location'] != 'all') $q5 = $_POST['location']; else $q5 = '%';
 
-  // $q1 = "no_kendaraan LIKE '" . $q1 ."'";
+  // $q1 = "truk_number LIKE '" . $q1 ."'";
   $q2 = "tebangan_id LIKE '" . $q2."'";
   $q3 = "AND bongkar_log.bongkar_status LIKE '" . $q3."'";
   $q4 = "AND bongkar_log. LIKE '" . $q4."'";  
-  $q5 = "lokasi LIKE '" . $q5."'";
+  $q5 = "location LIKE '" . $q5."'";
   
   $statement = "
   SELECT bongkar_log.*, tebangan.*  
@@ -65,13 +65,13 @@ if (isset($_POST['save'])) {
                       <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Kendaraan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="no_kendaraan" class="form-control" required>
+                          <select name="truk_number" class="form-control" required>
                             <option value="all" selected>Semua</option>
                             <?php
                               $query = $mysqli->query("SELECT * FROM truk");
                               while ($data = $query->fetch_array()) {
                             ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['no_kendaraan'];?></option>
+                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['truk_number'];?></option>
                           <?php } ?>
                           </select>
                         </div>
@@ -115,10 +115,10 @@ if (isset($_POST['save'])) {
                           <select name="location" class="form-control" required>
                             <option value="all" selected>Semua</option>
                             <?php
-                              $query = $mysqli->query("SELECT * FROM truk_log GROUP BY lokasi");
+                              $query = $mysqli->query("SELECT * FROM truk_log GROUP BY location");
                               while ($data = $query->fetch_array()) {
                             ?> 
-                            <option value="<?php echo $data['lokasi'] ?>"><?php echo $data['lokasi'];?></option>
+                            <option value="<?php echo $data['location'] ?>"><?php echo $data['location'];?></option>
                           <?php } ?>
                           </select>
                         </div>
@@ -184,11 +184,11 @@ if (isset($_POST['save'])) {
                         <?php while ($row = $dataList->fetch_array()) { ?>
                           <tr>
                             <td><?= $x++; ?></td>
-                            <td><?= $row['create_at'] ?></td>
+                            <td><?= $row['created_at'] ?></td>
                             <td><?= $row['bongkar_date'] ?></td>
                             <!-- <td><?= $row['bongkar_nota'] ?></td> -->
                             <td><?= $row['tebangan_kayu_name'] ?></td>
-                            <!-- <td><?= $row['no_kendaraan'] ?></td> -->
+                            <!-- <td><?= $row['truk_number'] ?></td> -->
                             <td>Subkon</td>
                             <td><?= $row['bongkar_status'] ?></td>
                             <td><?= $row['bongkar_tonase'] ?></td>

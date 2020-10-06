@@ -9,12 +9,12 @@ if (isset($_POST['save'])) {
   //   INSERT into truk
   //   (
   //     vendor_id,
-  //     no_kendaraan
+  //     truk_number
   //   )
   //   value
   //   (
   //     '$_POST[vendor_id]',
-  //     '$_POST[no_kendaraan]'
+  //     '$_POST[truk_number]'
   //   )
   //   ");
   // $truk_id = mysqli_insert_id($mysqli);
@@ -25,8 +25,8 @@ if (isset($_POST['save'])) {
   //      nama_supir,
   //      pinjaman_uang_jalan,
   //      tgl_pinjaman_uang_jalan,
-  //      spesial_case,
-  //      lokasi,
+  //      special_case,
+  //      location,
   //      informasi,
   //      tanggal_masuk,
   //      tanggal_keluar
@@ -37,8 +37,8 @@ if (isset($_POST['save'])) {
   //     '$_POST[nama_supir]',
   //     '$_POST[pinjaman_uang_jalan]',
   //     '$_POST[tgl_pinjaman_uang_jalan]',
-  //     '$_POST[spesial_case]',
-  //     '$_POST[lokasi]',
+  //     '$_POST[special_case]',
+  //     '$_POST[location]',
   //     '$_POST[informasi]',
   //     '$_POST[tanggal_masuk]',
   //     '$_POST[tanggal_keluar]'
@@ -82,13 +82,13 @@ if (isset($_POST['save'])) {
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Kendaraan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="no_kendaraan" class="form-control">
+                          <select name="truk_number" class="form-control">
                             <option value="" selected>Semua</option>
                             <?php
                               $query = $mysqli->query("SELECT * FROM truk");
                               while ($data = $query->fetch_array()) {
                             ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['no_kendaraan'];?></option>
+                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['truk_number'];?></option>
                           <?php } ?>
                           </select>
                         </div>

@@ -83,12 +83,12 @@ include"header.php" ?>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="spesial_case" class="btn-group" data-toggle="buttons">
+                          <div id="special_case" class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="spesial_case" value="Lunas">Lunas 
+                              <input type="radio" name="special_case" value="Lunas">Lunas 
                             </label>
                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="spesial_case" value="Belum Lunas"> Belum Lunas
+                              <input type="radio" name="special_case" value="Belum Lunas"> Belum Lunas
                             </label>
                           </div>
                         </div>
@@ -97,12 +97,12 @@ include"header.php" ?>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Spesial Case Angkutan <span><small>(Mengangkat kayu tebangan lain)</small></span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="spesial_case" class="btn-group" data-toggle="buttons">
+                          <div id="special_case" class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="spesial_case" value="Yes">Yes 
+                              <input type="radio" name="special_case" value="Yes">Yes 
                             </label>
                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="spesial_case" value="No"> No
+                              <input type="radio" name="special_case" value="No"> No
                             </label>
                           </div>
                         </div>

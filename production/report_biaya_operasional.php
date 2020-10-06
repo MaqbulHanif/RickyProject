@@ -31,7 +31,7 @@ include"header.php" ?>
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no-kendaraan">No. Kendaraan <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="No-Kendaraan" required="required" name="no_kendaraan" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="No-Kendaraan" required="required" name="truk_number" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div> 
                       <div class="ln_solid"></div>

@@ -12,19 +12,19 @@ if (isset($_POST['save'])) {
   $q3 = '';  
   $q5 = '';
 
-  if($_POST['no_kendaraan'] != 'all') $q1 = $_POST['no_kendaraan']; else $q1 = '%';
+  if($_POST['truk_number'] != 'all') $q1 = $_POST['truk_number']; else $q1 = '%';
   if($_POST['vendor_name'] != 'all') $q2 = $_POST['vendor_name']; else $q2 = '%';
   if($_POST['status'] != 'all') $q3 = $_POST['status']; else $q3 = '%';  
   if($_POST['nota_number'] != 'all') $q5 = $_POST['nota_number']; else $q5 = '%';
   
-  $q1 = "no_kendaraan LIKE '" . $q1 ."'";
+  $q1 = "truk_number LIKE '" . $q1 ."'";
   $q2 = "AND vendor_id LIKE '" . $q2."'";
   $q3 = "AND bongkar_log.bongkar_status LIKE '" . $q3."'";  
   $q5 = "AND bongkar_nota LIKE '" . $q5."'";
 
   $statement = "
-  SELECT bongkar_log.*, truk.no_kendaraan, vendor.vendor_name, 
-  truk_log.pinjaman_uang_jalan, truk_log.lokasi
+  SELECT bongkar_log.*, truk.truk_number, vendor.vendor_name, 
+  truk_log.pinjaman_uang_jalan, truk_log.location
   FROM bongkar_log 
   JOIN truk_log ON truk_log.truk_log_id=bongkar_log.truk_log_id
   JOIN truk ON truk.truk_id=truk_log.truk_id
@@ -64,13 +64,13 @@ if (isset($_POST['save'])) {
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Kendaraan <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="no_kendaraan" class="form-control" required>
+                          <select name="truk_number" class="form-control" required>
                             <option value="all" selected>Semua</option>
                             <?php
                               $query = $mysqli->query("SELECT * FROM truk");
                               while ($data = $query->fetch_array()) {
                             ?> 
-                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['no_kendaraan'];?></option>
+                            <option value="<?php echo $data['vendor_id'] ?>"><?php echo $data['truk_number'];?></option>
                           <?php } ?>
                           </select>
                         </div>
@@ -189,19 +189,19 @@ if (isset($_POST['save'])) {
                           ?>
                           <tr>
                             <td><?= $x++; ?></td>
-                            <td><?= $row['create_at'] ?></td>
+                            <td><?= $row['created_at'] ?></td>
                             <td><?= $row['bongkar_date'] ?></td>
                             <td><?= $row['bongkar_nota'] ?></td>
                             <td><?= $row['vendor_name'] ?></td>
-                            <td><?= $row['no_kendaraan'] ?></td>
+                            <td><?= $row['truk_number'] ?></td>
                             <td><?= $row['bongkar_status'] ?></td>
                             <td><?= $row['bongkar_tonase'] ?></td>
                             <td><?= $row['bongkar_hasil_perluasan'] ?></td>
                             <td><?= $row['pinjaman_uang_jalan'] ?></td>
                             <td><?= (floatval($row['bongkar_hasil_perluasan']) - floatval($row['pinjaman_uang_jalan'])) ?></td>
-                            <td><?= $row['lokasi'] ?></td>    
+                            <td><?= $row['location'] ?></td>    
                             <td><?= $row['information'] ?></td>              
-                            <td><?= $row['spesial_case'] ?></td>    
+                            <td><?= $row['special_case'] ?></td>    
                           </tr>  
                         <?php } ?>                      
                         </tbody>                        
